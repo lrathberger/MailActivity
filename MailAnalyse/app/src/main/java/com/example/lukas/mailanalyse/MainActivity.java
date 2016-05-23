@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                intentContactMail=new Intent(MainActivity.this,MainActivity.class);
+                intentContactMail=new Intent(MainActivity.this,Mail.class);
                 intentContactMail.putExtra(CONTACTID, id);
                 startActivity(intentContactMail);
             }
