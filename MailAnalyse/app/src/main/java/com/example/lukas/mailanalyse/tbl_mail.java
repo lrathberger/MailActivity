@@ -20,7 +20,7 @@ public class tbl_mail {
                     MAIL_CONTENT + " TEXT NOT NULL, " +
                     MAIL_POSITIV + " INTEGER, " +
                     MAIL_DATE + " TEXT, " +
-                    MAIL_SUBJECT + " TEXT " +
+                    MAIL_SUBJECT + " TEXT, " +
                     CONTACT_ID + " INT NOT NULL);";
 
     public static final String SQL_DROP =
