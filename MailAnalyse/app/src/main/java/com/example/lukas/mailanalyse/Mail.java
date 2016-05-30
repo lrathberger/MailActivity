@@ -21,6 +21,7 @@ public class Mail extends AppCompatActivity
     SimpleCursorAdapter adapterNeg;
 
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,12 @@ public class Mail extends AppCompatActivity
     }
 
     private void showEmails() {
-        Cursor cursor =getContentResolver().query(MailAnalyseProvider.MAILS_URI,null,MailAnalyseProvider.Mails.CONTACTID + "=?", new String[]{String.valueOf(contact)},MailAnalyseProvider.Mails.MAILSUBJECT);
+        Cursor cursorPostiv =getContentResolver().query(MailAnalyseProvider.MAILS_URI,null,MailAnalyseProvider.Mails.CONTACTID + "=? AND " + MailAnalyseProvider.Mails.POSITIV + "=1", new String[]{String.valueOf(contact)},MailAnalyseProvider.Mails.MAILSUBJECT);
+        Cursor cursorNegativ =getContentResolver().query(MailAnalyseProvider.MAILS_URI,null,MailAnalyseProvider.Mails.CONTACTID + "=? AND " + MailAnalyseProvider.Mails.POSITIV + "=0", new String[]{String.valueOf(contact)},MailAnalyseProvider.Mails.MAILSUBJECT);
+        adapterPos=new SimpleCursorAdapter(this,android.R.layout.simple_list_item_1,cursorPostiv,new String[]{MailAnalyseProvider.Mails.MAILSUBJECT},new int[]{android.R.id.text1});
+        listViewPos.setAdapter(adapterPos);
+        adapterNeg=new SimpleCursorAdapter(this,android.R.layout.simple_list_item_1,cursorNegativ,new String[]{MailAnalyseProvider.Mails.MAILSUBJECT},new int[]{android.R.id.text1});
+        listViewNeg.setAdapter(adapterNeg);
 
     }
 }
