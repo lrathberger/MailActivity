@@ -37,12 +37,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String emailaddr="lukasrathberger@gmail.com";
+        Cursor cursorTest=getContentResolver().query(MailAnalyseProvider.CONTACT_URI,null,null,null,null);
+        if(!cursorTest.moveToFirst()) {
+            String emailaddr = "lukasrathberger@gmail.com";
 
-        ContentValues values =new ContentValues();
-        values.put(MailAnalyseProvider.Contact.CONTACTNAME,emailaddr);
+            ContentValues values = new ContentValues();
+            values.put(MailAnalyseProvider.Contact.CONTACTNAME, emailaddr);
 
-        getContentResolver().insert(MailAnalyseProvider.CONTACT_URI,values);
+            getContentResolver().insert(MailAnalyseProvider.CONTACT_URI, values);
+            showContact();
+        }
         showContact();
     }
 

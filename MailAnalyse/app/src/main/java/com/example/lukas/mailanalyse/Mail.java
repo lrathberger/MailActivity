@@ -3,6 +3,7 @@ package com.example.lukas.mailanalyse;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
@@ -35,21 +36,42 @@ public class Mail extends AppCompatActivity
         listViewPos=(ListView)findViewById(R.id.listViewPositiv);
         listViewNeg=(ListView)findViewById(R.id.listViewNegativ);
 
-        String mailContent ="jjafdsahfdsahfsdahfsadjf";
-        int mailpositiv=1;
-        String maildate="12.34.5";
-        String mailsubject="test";
+        Cursor cursorTest=getContentResolver().query(MailAnalyseProvider.MAILS_URI,null,null,null,null);
+        if(!cursorTest.moveToFirst()) {
 
-        ContentValues values=new ContentValues();
-        values.put(MailAnalyseProvider.Mails.CONTENT,mailContent);
-        values.put(MailAnalyseProvider.Mails.POSITIV,mailpositiv);
-        values.put(MailAnalyseProvider.Mails.DATE,maildate);
-        values.put(MailAnalyseProvider.Mails.SUBJECT,mailsubject);
-        Log.d("id",contact +"");
-        values.put("contact_id",contact);
 
-        getContentResolver().insert(MailAnalyseProvider.MAILS_URI,values);
+            String mailContent = "jjafdsahfdsahfsdahfsadjf";
+            int mailpositiv = 1;
+            String maildate = "12.34.5";
+            String mailsubject = "test";
 
+            ContentValues values = new ContentValues();
+            values.put(MailAnalyseProvider.Mails.CONTENT, mailContent);
+            values.put(MailAnalyseProvider.Mails.POSITIV, mailpositiv);
+            values.put(MailAnalyseProvider.Mails.DATE, maildate);
+            values.put(MailAnalyseProvider.Mails.SUBJECT, mailsubject);
+            Log.d("id", contact + "");
+            values.put("contact_id", contact);
+
+            getContentResolver().insert(MailAnalyseProvider.MAILS_URI, values);
+
+            String mailContent2 = "jjafdsahfdsahfsdahfsadjf1";
+            int mailpositiv2 = 0;
+            String maildate2 = "12.34.5";
+            String mailsubject2 = "test1";
+
+            ContentValues values2 = new ContentValues();
+            values2.put(MailAnalyseProvider.Mails.CONTENT, mailContent2);
+            values2.put(MailAnalyseProvider.Mails.POSITIV, mailpositiv2);
+            values2.put(MailAnalyseProvider.Mails.DATE, maildate2);
+            values2.put(MailAnalyseProvider.Mails.SUBJECT, mailsubject2);
+            Log.d("id", contact + "");
+            values2.put("contact_id", contact);
+
+            getContentResolver().insert(MailAnalyseProvider.MAILS_URI, values2);
+
+            showEmails();
+        }
 
 
         showEmails();
