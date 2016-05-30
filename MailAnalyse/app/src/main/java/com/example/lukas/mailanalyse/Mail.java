@@ -44,7 +44,7 @@ public class Mail extends AppCompatActivity
         values.put("contact_id",contact);
 
         getContentResolver().insert(MailAnalyseProvider.MAILS_URI,values);
-        
+
 
 
         showEmails();
