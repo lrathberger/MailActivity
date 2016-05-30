@@ -1,5 +1,6 @@
 package com.example.lukas.mailanalyse;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentContactMail);
             }
         });
+
+        String emailaddr="lukasrathberger@gmail.com";
+
+        ContentValues values =new ContentValues();
+        values.put(MailAnalyseProvider.Contact.CONTACTNAME,emailaddr);
+
+        getContentResolver().insert(MailAnalyseProvider.CONTACT_URI,values);
+        showContact();
     }
 
     @Override

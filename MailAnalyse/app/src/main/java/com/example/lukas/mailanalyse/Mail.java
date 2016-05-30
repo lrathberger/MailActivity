@@ -1,5 +1,6 @@
 package com.example.lukas.mailanalyse;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -29,6 +30,23 @@ public class Mail extends AppCompatActivity
         contact=getIntent().getLongExtra(MainActivity.CONTACTID,0);
         listViewPos=(ListView)findViewById(R.id.listViewPositiv);
         listViewNeg=(ListView)findViewById(R.id.listViewNegativ);
+
+        String mailContent ="jjafdsahfdsahfsdahfsadjf";
+        int mailpositiv=1;
+        String maildate="12.34.5";
+        String mailsubject="test";
+
+        ContentValues values=new ContentValues();
+        values.put("content",mailContent);
+        values.put("mailpositiv",mailpositiv);
+        values.put("maildate",maildate);
+        values.put("mailsubject",mailsubject);
+        values.put("contact_id",contact);
+
+        getContentResolver().insert(MailAnalyseProvider.MAILS_URI,values);
+        
+
+
         showEmails();
 
     }
