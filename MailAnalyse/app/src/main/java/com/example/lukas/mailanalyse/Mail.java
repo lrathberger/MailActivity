@@ -2,6 +2,7 @@ package com.example.lukas.mailanalyse;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -24,6 +27,8 @@ public class Mail extends AppCompatActivity
     SimpleCursorAdapter adapterPos;
     SimpleCursorAdapter adapterNeg;
 
+    public static final String MAILID="mailid";
+
 
 
     @Override
@@ -32,9 +37,29 @@ public class Mail extends AppCompatActivity
         setContentView(R.layout.activity_mail);
 
         contact=getIntent().getLongExtra(MainActivity.CONTACTID,0);
-        Log.d("contact_id",contact+"");
+        Log.d("contact_id", contact + "");
         listViewPos=(ListView)findViewById(R.id.listViewPositiv);
+        listViewPos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent mailLesen=new Intent(Mail.this,Mail_lesen.class);
+                mailLesen.putExtra(MAILID,id);
+                mailLesen.putExtra(MainActivity.CONTACTID,contact);
+                startActivity(mailLesen);
+
+            }
+        });
         listViewNeg=(ListView)findViewById(R.id.listViewNegativ);
+        listViewNeg.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent mailLesen=new Intent(Mail.this,Mail_lesen.class);
+                mailLesen.putExtra(MAILID,id);
+                mailLesen.putExtra(MainActivity.CONTACTID,contact);
+                startActivity(mailLesen);
+
+            }
+        });
 
         Cursor cursorTest=getContentResolver().query(MailAnalyseProvider.MAILS_URI,null,null,null,null);
         if(!cursorTest.moveToFirst()) {

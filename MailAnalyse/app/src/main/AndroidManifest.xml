@@ -17,6 +17,8 @@
         </activity>
         <activity android:name=".Mail">
         </activity>
+        <activity android:name=".Mail_lesen">
+        </activity>
         <provider
             android:authorities="at.htl_grieskirchen.MailAnalyse"
             android:name=".MailAnalyseProvider"/>
