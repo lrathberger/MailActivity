@@ -32,7 +32,7 @@ public class Mail_lesen extends AppCompatActivity {
 
     private void showEmail() {
 
-      //  Cursor cursorContact=getContentResolver().query(MailAnalyseProvider.CONTACT_URI,null,MailAnalyseProvider.Mails.CONTACTID + "=" + contact,null,null ,MailAnalyseProvider.Mails.CONTACTID);
-        Log.d("Von",cursorContact.toString());
+       Cursor cursorContact=getContentResolver().query(MailAnalyseProvider.CONTACT_URI,null,MailAnalyseProvider.Mails.CONTACTID + "=" + String.valueOf(contact),null,MailAnalyseProvider.Contact.CONTACTNAME);
+
     }
 }
