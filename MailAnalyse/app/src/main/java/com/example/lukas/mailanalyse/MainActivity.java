@@ -44,10 +44,12 @@ public class MainActivity extends AppCompatActivity {
             String emailaddr2 = "lukas.rathberger@inext.at";
 
             ContentValues values = new ContentValues();
+            ContentValues values2 = new ContentValues();
             values.put(MailAnalyseProvider.Contact.CONTACTNAME, emailaddr);
-            values.put(MailAnalyseProvider.Contact.CONTACTNAME,emailaddr2);
+            values2.put(MailAnalyseProvider.Contact.CONTACTNAME,emailaddr2);
 
             getContentResolver().insert(MailAnalyseProvider.CONTACT_URI, values);
+            getContentResolver().insert(MailAnalyseProvider.CONTACT_URI, values2);
 
             showContact();
         }
@@ -61,13 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showContact() {
-        Cursor cursor =getContentResolver().query(MailAnalyseProvider.CONTACT_URI,null,null,null,MailAnalyseProvider.Contact.CONTACTNAME);
-    
-        while (cursor.moveToNext())
-        {
-
-            Log.d("Contact", cursor.getString(cursor.getColumnIndex(tbl_contact.CONTACT_EMAIL)));
-        }
+        Cursor cursor =getContentResolver().query(MailAnalyseProvider.CONTACT_URI,null,null,null,MailAnalyseProvider.Contact.CONTACTID);
         adapterEmail=new SimpleCursorAdapter(this,android.R.layout.simple_list_item_1,cursor,new String[]{MailAnalyseProvider.Contact.CONTACTNAME},new int[]{android.R.id.text1});
         listViewEmail.setAdapter(adapterEmail);
     }

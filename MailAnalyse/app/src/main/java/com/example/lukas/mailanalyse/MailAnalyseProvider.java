@@ -23,6 +23,7 @@ public class MailAnalyseProvider extends ContentProvider{
 
     public class Contact{
         public static final String CONTACTNAME= tbl_contact.CONTACT_EMAIL;
+        public static final String CONTACTID= tbl_contact.CONTACT_ID;
     }
     public class Mails{
         public static final String SUBJECT= tbl_mail.MAIL_SUBJECT;

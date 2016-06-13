@@ -22,6 +22,10 @@ public class Mail_lesen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail_lesen);
+        von=(TextView)findViewById(R.id.editTextVon);
+        betreff=(TextView)findViewById(R.id.editTextBetreff);
+        inhalt=(TextView)findViewById(R.id.editTextInhalt);
+
 
         mail=getIntent().getLongExtra(Mail.MAILID,0);
         contact=getIntent().getLongExtra(MainActivity.CONTACTID,0);
@@ -32,7 +36,7 @@ public class Mail_lesen extends AppCompatActivity {
 
     private void showEmail() {
 
-       Cursor cursorContact=getContentResolver().query(MailAnalyseProvider.CONTACT_URI,null,MailAnalyseProvider.Mails.CONTACTID + "=" + String.valueOf(contact),null,MailAnalyseProvider.Contact.CONTACTNAME);
-
+        Cursor cursorContact =getContentResolver().query(MailAnalyseProvider.CONTACT_URI,null,MailAnalyseProvider.Contact.CONTACTID + "=" + String.valueOf(contact) ,null,MailAnalyseProvider.Contact.CONTACTID);
+        von.setText(cursorContact.toString());
     }
 }

@@ -32,7 +32,7 @@ public class Mail extends AppCompatActivity
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail);
 
@@ -69,14 +69,14 @@ public class Mail extends AppCompatActivity
             int mailpositiv = 1;
             String maildate = "12.34.5";
             String mailsubject = "test";
+            int contactdID=1;
 
             ContentValues values = new ContentValues();
             values.put(MailAnalyseProvider.Mails.CONTENT, mailContent);
             values.put(MailAnalyseProvider.Mails.POSITIV, mailpositiv);
             values.put(MailAnalyseProvider.Mails.DATE, maildate);
             values.put(MailAnalyseProvider.Mails.SUBJECT, mailsubject);
-            Log.d("id", contact + "");
-            values.put("contact_id", contact);
+            values.put(MailAnalyseProvider.Mails.CONTACTID, contactdID);
 
             getContentResolver().insert(MailAnalyseProvider.MAILS_URI, values);
 
@@ -90,10 +90,24 @@ public class Mail extends AppCompatActivity
             values2.put(MailAnalyseProvider.Mails.POSITIV, mailpositiv2);
             values2.put(MailAnalyseProvider.Mails.DATE, maildate2);
             values2.put(MailAnalyseProvider.Mails.SUBJECT, mailsubject2);
-            Log.d("id", contact + "");
-            values2.put("contact_id", contact);
+            values2.put(MailAnalyseProvider.Mails.CONTACTID,contactdID);
 
             getContentResolver().insert(MailAnalyseProvider.MAILS_URI, values2);
+
+            String mailContent3 = "jjafdsahfdsahfsdahfsadj3f";
+            int mailpositiv3 = 1;
+            String maildate3 = "12.34.5";
+            String mailsubject3 = "test3";
+            int contactdID3=2;
+
+            ContentValues values3 = new ContentValues();
+            values3.put(MailAnalyseProvider.Mails.CONTENT, mailContent3);
+            values3.put(MailAnalyseProvider.Mails.POSITIV, mailpositiv3);
+            values3.put(MailAnalyseProvider.Mails.DATE, maildate3);
+            values3.put(MailAnalyseProvider.Mails.SUBJECT, mailsubject3);
+            values3.put(MailAnalyseProvider.Mails.CONTACTID, contactdID3);
+
+            getContentResolver().insert(MailAnalyseProvider.MAILS_URI, values3);
 
             showEmails();
         }
@@ -104,8 +118,8 @@ public class Mail extends AppCompatActivity
     }
 
     private void showEmails() {
-        Cursor cursorPostiv =getContentResolver().query(MailAnalyseProvider.MAILS_URI,null,MailAnalyseProvider.Mails.CONTACTID + "=" + String.valueOf(contact) + " AND " + MailAnalyseProvider.Mails.POSITIV + "=1",null,MailAnalyseProvider.Mails.SUBJECT);
-        Cursor cursorNegativ =getContentResolver().query(MailAnalyseProvider.MAILS_URI,null,MailAnalyseProvider.Mails.CONTACTID + "=" + String.valueOf(contact) + " AND " + MailAnalyseProvider.Mails.POSITIV + "=0",null,MailAnalyseProvider.Mails.SUBJECT);
+        Cursor cursorPostiv =getContentResolver().query(MailAnalyseProvider.MAILS_URI,null,MailAnalyseProvider.Mails.CONTACTID + "=" + String.valueOf(contact) + " AND " + MailAnalyseProvider.Mails.POSITIV + "=1",null,MailAnalyseProvider.Mails.CONTACTID);
+        Cursor cursorNegativ =getContentResolver().query(MailAnalyseProvider.MAILS_URI,null,MailAnalyseProvider.Mails.CONTACTID + "=" + String.valueOf(contact) + " AND " + MailAnalyseProvider.Mails.POSITIV + "=0",null,MailAnalyseProvider.Mails.CONTACTID);
         adapterPos=new SimpleCursorAdapter(this,android.R.layout.simple_list_item_1,cursorPostiv,new String[]{MailAnalyseProvider.Mails.SUBJECT},new int[]{android.R.id.text1});
         listViewPos.setAdapter(adapterPos);
         adapterNeg=new SimpleCursorAdapter(this,android.R.layout.simple_list_item_1,cursorNegativ,new String[]{MailAnalyseProvider.Mails.SUBJECT},new int[]{android.R.id.text1});
