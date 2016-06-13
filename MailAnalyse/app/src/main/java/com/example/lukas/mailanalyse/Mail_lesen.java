@@ -36,7 +36,16 @@ public class Mail_lesen extends AppCompatActivity {
 
     private void showEmail() {
 
-        Cursor cursorContact =getContentResolver().query(MailAnalyseProvider.CONTACT_URI,null,MailAnalyseProvider.Contact.CONTACTID + "=" + String.valueOf(contact) ,null,MailAnalyseProvider.Contact.CONTACTID);
-        von.setText(cursorContact.toString());
+        Cursor cursorContact =getContentResolver().query(MailAnalyseProvider.CONTACT_URI,new String[]{MailAnalyseProvider.Contact.CONTACTNAME},MailAnalyseProvider.Contact.CONTACTID + "=" + String.valueOf(contact) ,null,null);
+        cursorContact.moveToFirst();
+         Log.d("TEST",cursorContact.getString(cursorContact.getColumnIndex(MailAnalyseProvider.Contact.CONTACTNAME)));
+        von.setText(cursorContact.getString(cursorContact.getColumnIndex(MailAnalyseProvider.Contact.CONTACTNAME)));
+        //Cursor cursorBetreff=getContentResolver().query(MailAnalyseProvider.MAILS_URI,null,MailAnalyseProvider.Contact.CONTACTID + "=" + String.valueOf(contact),null,null );
+        //cursorBetreff.moveToFirst();
+        Cursor cursorBetreff =getContentResolver().query(MailAnalyseProvider.MAILS_URI,null,MailAnalyseProvider.Mails.CONTACTID + "=" + String.valueOf(contact),null,null);
+        //cursorBetreff.moveToFirst();
+        betreff.setText(cursorBetreff.getString(cursorBetreff.getColumnIndex(MailAnalyseProvider.Mails.SUBJECT)));
+        Log.d("TEST",cursorBetreff.getString(cursorBetreff.getColumnIndex(MailAnalyseProvider.Mails.SUBJECT)));
+
     }
 }
