@@ -80,7 +80,7 @@ public class Mail extends AppCompatActivity
 
             getContentResolver().insert(MailAnalyseProvider.MAILS_URI, values);
 
-            String mailContent2 = "jjafdsahfdsahfsdahfsadjf1";
+            String mailContent2 = "jjafdsahfdsahfsdahfsadjf23455";
             int mailpositiv2 = 0;
             String maildate2 = "12.34.5";
             String mailsubject2 = "test1";

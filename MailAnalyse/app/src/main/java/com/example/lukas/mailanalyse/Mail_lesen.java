@@ -28,6 +28,7 @@ public class Mail_lesen extends AppCompatActivity {
 
 
         mail=getIntent().getLongExtra(Mail.MAILID,0);
+        Log.d("TEST",mail+"");
         contact=getIntent().getLongExtra(MainActivity.CONTACTID,0);
 
         showEmail();
@@ -40,12 +41,18 @@ public class Mail_lesen extends AppCompatActivity {
         cursorContact.moveToFirst();
          Log.d("TEST",cursorContact.getString(cursorContact.getColumnIndex(MailAnalyseProvider.Contact.CONTACTNAME)));
         von.setText(cursorContact.getString(cursorContact.getColumnIndex(MailAnalyseProvider.Contact.CONTACTNAME)));
-        //Cursor cursorBetreff=getContentResolver().query(MailAnalyseProvider.MAILS_URI,null,MailAnalyseProvider.Contact.CONTACTID + "=" + String.valueOf(contact),null,null );
-        //cursorBetreff.moveToFirst();
-        Cursor cursorBetreff =getContentResolver().query(MailAnalyseProvider.MAILS_URI,null,MailAnalyseProvider.Mails.CONTACTID + "=" + String.valueOf(contact),null,null);
-        //cursorBetreff.moveToFirst();
-        betreff.setText(cursorBetreff.getString(cursorBetreff.getColumnIndex(MailAnalyseProvider.Mails.SUBJECT)));
+
+        Cursor cursorBetreff =getContentResolver().query(MailAnalyseProvider.MAILS_URI,new String[] {MailAnalyseProvider.Mails.SUBJECT  },MailAnalyseProvider.Mails.CONTACTID + "=" + String.valueOf(contact) + " AND " + MailAnalyseProvider.Mails.MAILID + "=" + String.valueOf(mail) ,null,null);
+        cursorBetreff.moveToFirst();
         Log.d("TEST",cursorBetreff.getString(cursorBetreff.getColumnIndex(MailAnalyseProvider.Mails.SUBJECT)));
+        betreff.setText(cursorBetreff.getString(cursorBetreff.getColumnIndex(MailAnalyseProvider.Mails.SUBJECT)));
+
+        Cursor cursorInhalt =getContentResolver().query(MailAnalyseProvider.MAILS_URI,new String[] {MailAnalyseProvider.Mails.CONTENT  },MailAnalyseProvider.Mails.CONTACTID + "=" + String.valueOf(contact) + " AND " + MailAnalyseProvider.Mails.MAILID + "=" + String.valueOf(mail),null,null);
+        cursorInhalt.moveToFirst();
+        Log.d("TEST",cursorInhalt.getString(cursorInhalt.getColumnIndex(MailAnalyseProvider.Mails.CONTENT)));
+        inhalt.setText(cursorInhalt.getString(cursorInhalt.getColumnIndex(MailAnalyseProvider.Mails.CONTENT)));
+
+
 
     }
 }
