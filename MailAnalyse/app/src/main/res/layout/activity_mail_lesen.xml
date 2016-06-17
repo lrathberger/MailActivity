@@ -18,7 +18,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextVon"/>
+        android:id="@+id/editTextVon"
+        android:textColor="@android:color/holo_blue_dark"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +28,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-    android:id="@+id/editTextBetreff"/>
+        android:id="@+id/editTextBetreff"
+        android:textColor="@android:color/holo_blue_dark"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +39,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/editTextInhalt"/>
+        android:id="@+id/editTextInhalt"
+        android:textColor="@android:color/holo_blue_dark"/>
 
 
 </LinearLayout>
